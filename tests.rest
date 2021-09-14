@@ -1,0 +1,16 @@
+GET http://localhost:5000/api/todoitems HTTP/1.0
+
+####
+
+POST http://localhost:5000/api/todoitems HTTP/1.0
+Content-Type: application/json
+
+{
+  "name":"walk dog",
+  "isComplete":true
+}
+
+####
+
+DELETE http://localhost:5000/api/todoitems/2 HTTP/1.0
+Content-Type: application/json
