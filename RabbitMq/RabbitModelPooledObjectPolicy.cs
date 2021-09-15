@@ -37,32 +37,32 @@ namespace TodoApi.RabbitMq
             var channel = connection.CreateModel();
             
             channel.ExchangeDeclare(
-                exchange: "Todo.exchange", 
+                exchange: _options.Prefix + ".exchange", 
                 type: "direct", 
                 durable: true, 
                 autoDelete: false);
                 
             channel.QueueDeclare(
-                queue: "Todo.createQueue", 
-                durable: false,
+                queue: _options.Prefix + ".createQueue", 
+                durable: true,
                 exclusive: false, 
                 autoDelete: false);
                 
             channel.QueueBind(
-                queue: "Todo.createQueue", 
-                exchange: "Todo.exchange", 
-                routingKey: "Todo.create");
+                queue: _options.Prefix + ".createQueue", 
+                exchange: _options.Prefix + ".exchange", 
+                routingKey: _options.Prefix + ".create");
                 
             channel.QueueDeclare(
-                queue: "Todo.deleteQueue", 
-                durable: false,
+                queue: _options.Prefix + ".deleteQueue", 
+                durable: true,
                 exclusive: false, 
                 autoDelete: false);
                 
             channel.QueueBind(
-                queue: "Todo.deleteQueue", 
-                exchange: "Todo.exchange", 
-                routingKey: "Todo.delete");
+                queue: _options.Prefix + ".deleteQueue", 
+                exchange: _options.Prefix + ".exchange", 
+                routingKey: _options.Prefix + ".delete");
 
             return connection;
         }  
